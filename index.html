@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #F7C6C7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 220px;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+        }
+
+        #yesBtn {
+            background-color: green;
+            color: white;
+            border: none;
+            z-index: 1; /* stays behind No until final */
+        }
+
+        #noBtn {
+            background-color: black;
+            color: white;
+            border: 2px solid red;
+            z-index: 3; /* stays on top */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 8px;
+            right: 12px;
+            font-size: 12px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Will you be my Valentine ❤️ ?</h1>
+
+        <img src="https://media.tenor.com/MfeQ992BMj4AAAAM/velvet.gif" alt="Bear GIF">
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="goYes()">Yes</button>
+            <button id="noBtn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <footer>© Krishna Adhikari</footer>
+
+    <script>
+        let noClickCount = 0;
+        const noTexts = [
+            "Are you sure?",
+            "Please na 🥺",
+            "Yes please 😭"
+        ];
+
+        function handleNo() {
+            noClickCount++;
+
+            const yesBtn = document.getElementById("yesBtn");
+            const noBtn = document.getElementById("noBtn");
+
+            if (noClickCount <= 3) {
+                yesBtn.style.transform = `scale(${1 + noClickCount * 0.6})`;
+                noBtn.innerText = noTexts[noClickCount - 1];
+            } else {
+                // FINAL TAKEOVER ONLY HERE
+                yesBtn.style.position = "fixed";
+                yesBtn.style.top = "0";
+                yesBtn.style.left = "0";
+                yesBtn.style.width = "100vw";
+                yesBtn.style.height = "100vh";
+                yesBtn.style.fontSize = "36px";
+                yesBtn.style.borderRadius = "0";
+                yesBtn.style.zIndex = "999";
+
+                noBtn.style.display = "none";
+            }
+        }
+
+        function goYes() {
+            window.location.href = "celebration.html";
+        }
+    </script>
+
+</body>
+</html>
